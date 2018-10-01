@@ -1,0 +1,23 @@
+<h2>Template Driven form</h2>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" emailname (blur)="checkEmail(f.value.email)" class="form-control" id="email" #eml="ngModel" required email  placeholder="Enter email" ngModel name="email">
+            <div class="alert-danger">
+            <div *ngIf="eml.touched && eml.invalid">
+                <p *ngIf="eml.errors.required">Email is required</p>
+                <p *ngIf="eml.errors.email">Please enter valid email Id</p>
+          
+            </div>
+            <p *ngIf="chk">{{ msg| customPipe}}</p> 
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" #pwd="ngModel" required placeholder="Enter password" ngModel name="pwd">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" name="remember" ngModel> Remember me</label>
+          </div>
+          <button type="submit" class="btn btn-default" [disabled]="f.invalid" (click)="callCustomEvent($event)">Submit</button>
+        </form>
